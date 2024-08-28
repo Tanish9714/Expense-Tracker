@@ -1,7 +1,10 @@
+"use client";
 import React from 'react'
 import Image from 'next/image'
+import { useUser } from '@clerk/nextjs'
 
 const Hero = () => {
+    const { user } = useUser();
     return (
         <section className="bg-gray-50 flex items-center flex-col">
             <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex">
@@ -12,25 +15,36 @@ const Hero = () => {
                     </h1>
 
                     <p className="mt-4 sm:text-xl/relaxed">
-                        Start creating your budget and save ton of money
+                        Start creating your budget and save a ton of money
                     </p>
 
-                    <div className="mt-8 flex flex-wrap justify-center gap-4">
-                        <a
-                            className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
-                            href="/sign-in"
-                        >
-                            Get Started
-                        </a>
+                    {user ? (
+                        <div className="mt-8 flex flex-wrap justify-center gap-4">
+                            <a
+                                className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                                href="/dashboard"
+                            >
+                                Get Started
+                            </a>
+                        </div>
+                    ) : (
+                        <div className="mt-8 flex flex-wrap justify-center gap-4">
+                            <a
+                                className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                                href="/sign-in"
+                            >
+                                Login!!
+                            </a>
+                        </div>
+                    )}
 
-                    </div>
                 </div>
             </div>
 
             <Image src={"/image.png"}
-            width={1000}
-            height={700}
-            className='-mt-9 rounded-xl border-2'/>
+                width={1000}
+                height={700}
+                className='-mt-9 rounded-xl border-2' />
         </section>
     )
 }

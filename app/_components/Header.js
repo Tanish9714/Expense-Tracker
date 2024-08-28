@@ -16,8 +16,8 @@ const Header = () => {
         height={100} />
       {
         isSignedIn ? <UserButton /> :
-          <Link href='/sign-in'>
-            <Button>Login!!</Button>
+          <Link href='/sign-up'>
+            <Button>Sign Up!!</Button>
           </Link>
       }
     </div>
